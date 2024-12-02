@@ -46,7 +46,9 @@ $ ./pwinfo --list
 
 Get information from the device:
 
-`# ./pwinfo --vpid 0764:0601`
+```
+# ./pwinfo --vpid 0764:0601
+```
 
 #### Running without sudo
 
@@ -56,7 +58,9 @@ You can make an udev rule to avoid to use sudo, example:
 
 * Create `/etc/udev/rules.d/99-ups.rules` and add this line:
 
-`SUBSYSTEM=="usb", ATTRS{idVendor}=="0764", ATTRS{idProduct}=="0601", MODE="0666"`
+```
+SUBSYSTEM=="usb", ATTRS{idVendor}=="0764", ATTRS{idProduct}=="0601", MODE="0666"
+```
 
 * Then reload rules:
 
