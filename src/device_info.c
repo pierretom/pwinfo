@@ -48,12 +48,13 @@ unsigned char get_input_report(hid_device *handle, unsigned char report_id,
 // Power
 unsigned char get_info_report_id_24(hid_device *handle) {
     unsigned char report_id = 24;
-    unsigned char buf[64];
+    unsigned char buf[64]; // Buffer enough large for the report
     int report_size;
 
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
+    // Extract data from the report
     unsigned short config_active_power = (buf[1] | (buf[2] << 8));
     printf("Output config active power:     %hu W\n", config_active_power);
 
@@ -202,13 +203,12 @@ unsigned char get_info_report_id_23(hid_device *handle) {
 // Battery
 unsigned char get_info_report_id_9(hid_device *handle) {
     unsigned char report_id = 9;
-    unsigned char buf[64]; // Buffer enough large for the report
+    unsigned char buf[64];
     int report_size;
 
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    // Extract data from the report
     unsigned short config_voltage = (buf[1] | (buf[2] << 8)) / 10;
     printf("Config voltage:                 %hu V\n", config_voltage);
 
@@ -331,7 +331,6 @@ unsigned char get_info_from_device(hid_device *handle) {
         printf("Manufacturer:                   %ls\n", wstr);
     else
         printf("Manufacturer:                   n/a\n");
-
 
     res = hid_get_product_string(handle, wstr, MAX_STR);
     if (res == 0)
