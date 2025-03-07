@@ -145,7 +145,7 @@ unsigned char get_info_report_id_19(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    printf("Output percent load:            %hhu%\n", buf[1]);
+    printf("Output percent load:            %hhu%%\n", buf[1]);
 
     return 0;
 }

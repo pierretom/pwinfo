@@ -11,6 +11,7 @@ No warranty, use it at your own risk.
 #### Dependencies
 
 * make
+* gcc (for clang use `CC = clang` in Makefile)
 * libhidapi-dev
 
 #### Compile
