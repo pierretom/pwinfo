@@ -137,20 +137,6 @@ unsigned char get_info_report_id_17(hid_device *handle) {
 }
 
 // Power
-unsigned char get_info_report_id_19(hid_device *handle) {
-    unsigned char report_id = 19;
-    unsigned char buf[64];
-    int report_size;
-
-    if (get_input_report(handle, report_id, buf, &report_size))
-        return 1;
-
-    printf("Output percent load:            %hhu%%\n", buf[1]);
-
-    return 0;
-}
-
-// Power
 unsigned char get_info_report_id_28(hid_device *handle) {
     unsigned char report_id = 28;
     unsigned char buf[64];
@@ -181,6 +167,20 @@ unsigned char get_info_report_id_29(hid_device *handle) {
 }
 
 // Power
+unsigned char get_info_report_id_19(hid_device *handle) {
+    unsigned char report_id = 19;
+    unsigned char buf[64];
+    int report_size;
+
+    if (get_input_report(handle, report_id, buf, &report_size))
+        return 1;
+
+    printf("Output percent load:            %hhu%%\n", buf[1]);
+
+    return 0;
+}
+
+// Power
 unsigned char get_info_report_id_23(hid_device *handle) {
     unsigned char report_id = 23;
     unsigned char buf[64];
@@ -193,9 +193,12 @@ unsigned char get_info_report_id_23(hid_device *handle) {
     unsigned char bit1 = (buf[1] >> 1) & 1;
     unsigned char bit2 = (buf[1] >> 2) & 1;
 
-    printf("Boost:                          %s\n", bit0 ? "yes" : "no");
-    printf("Overload:                       %s\n", bit1 ? "yes" : "no");
-    printf("Buck:                           %s\n", bit2 ? "yes" : "no");
+    printf(
+        "Overload:                       %s\n"
+        "Boost active:                   %s\n"
+        "Buck active:                    %s\n"
+        , bit1 ? "yes" : "no", bit0 ? "yes" : "no", bit2 ? "yes" : "no"
+    );
 
     return 0;
 }
@@ -274,12 +277,16 @@ unsigned char get_info_report_id_11(hid_device *handle) {
     unsigned char bit4 = (buf[1] >> 4) & 1;
     unsigned char bit5 = (buf[1] >> 5) & 1;
 
-    printf("AC present:                     %s\n", bit0 ? "yes" : "no");
-    printf("Charging:                       %s\n", bit1 ? "yes" : "no");
-    printf("Discharging:                    %s\n", bit2 ? "yes" : "no");
-    printf("Fully charged:                  %s\n", bit4 ? "yes" : "no");
-    printf("Below remaining capacity limit: %s\n", bit3 ? "yes" : "no");
-    printf("Remaining time limit expired:   %s\n", bit5 ? "yes" : "no");
+    printf(
+        "AC present:                     %s\n"
+        "Charging:                       %s\n"
+        "Discharging:                    %s\n"
+        "Fully charged:                  %s\n"
+        "Below remaining capacity limit: %s\n"
+        "Remaining time limit expired:   %s\n"
+        , bit0 ? "yes" : "no", bit1 ? "yes" : "no", bit2 ? "yes" : "no"
+        , bit4 ? "yes" : "no", bit3 ? "yes" : "no", bit5 ? "yes" : "no"
+    );
 
     return 0;
 }
@@ -293,12 +300,15 @@ unsigned char get_info_report_id_7(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    printf("Design capacity:                %hhu%%\n", buf[1]);
-    printf("Capacity granularity 1:         %hhu%%\n", buf[2]);
-    printf("Capacity granularity 2:         %hhu%%\n", buf[3]);
-    printf("Warning capacity limit:         %hhu%%\n", buf[4]);
-    printf("Full charge capacity:           %hhu%%\n", buf[5]);
-    printf("Remaining capacity limit:       %hhu%%\n", buf[6]);
+    printf(
+        "Design capacity:                %hhu%%\n"
+        "Capacity granularity 1:         %hhu%%\n"
+        "Capacity granularity 2:         %hhu%%\n"
+        "Warning capacity limit:         %hhu%%\n"
+        "Full charge capacity:           %hhu%%\n"
+        "Remaining capacity limit:       %hhu%%\n"
+        , buf[1], buf[2], buf[3], buf[4], buf[5], buf[6]
+    );
 
     return 0;
 }
@@ -322,9 +332,11 @@ unsigned char get_info_from_device(hid_device *handle) {
     wchar_t wstr[MAX_STR];
 
     // General
-    printf("\n");
-    printf("General\n");
-    printf("———————————————————————————————————————————————————————————————\n");
+    printf(
+        "\n"
+        "General\n"
+        "———————————————————————————————————————————————————————————————\n"
+    );
 
     res = hid_get_manufacturer_string(handle, wstr, MAX_STR);
     if (res == 0)
@@ -357,24 +369,28 @@ unsigned char get_info_from_device(hid_device *handle) {
         printf("Misc 1:                         n/a\n");
 
     // Power
-    printf("\n");
-    printf("Power\n");
-    printf("———————————————————————————————————————————————————————————————\n");
+    printf(
+        "\n"
+        "Power\n"
+        "———————————————————————————————————————————————————————————————\n"
+    );
     get_info_report_id_24(handle);
     get_info_report_id_14(handle);
     get_info_report_id_15(handle);
     get_info_report_id_18(handle);
     get_info_report_id_16(handle);
     get_info_report_id_17(handle);
-    get_info_report_id_19(handle);
     get_info_report_id_28(handle);
     get_info_report_id_29(handle);
+    get_info_report_id_19(handle);
     get_info_report_id_23(handle);
 
     // Battery
-    printf("\n");
-    printf("Battery\n");
-    printf("———————————————————————————————————————————————————————————————\n");
+    printf(
+        "\n"
+        "Battery\n"
+        "———————————————————————————————————————————————————————————————\n"
+    );
     get_info_report_id_9(handle);
     get_info_report_id_10(handle);
     get_info_report_id_8(handle);

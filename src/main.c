@@ -17,79 +17,85 @@ const struct option long_options[] = {
 };
 
 void show_help(const char* program_name) {
-    printf("Usage:\n  %s [OPTION]\n\n", program_name);
-    printf("Show information from PowerWalker UPS devices that support HID.\n");
-    printf("Basic VI 850 SB currently supported, can work with similar models.\n");
-    printf("No warranty, use it at your own risk.\n\n");
-    printf("Options:\n");
-    printf("  -l, --list             List all HID devices.\n");
-    printf("  -i, --vpid VID:PID     Use Vendor ID and Product ID to get info from device.\n");
-    printf("  -p, --path PATH        Use PATH (see --list option) to get info from device.\n");
-    printf("  -d, --description      Show the description of usage names.\n");
-    printf("  -h, --help             Show help.\n");
+    printf("Usage:\n  %s [OPTION]\n\n"
+        "Show information from PowerWalker UPS devices that support HID.\n"
+        "Basic VI 850 SB currently supported, can work with similar models.\n"
+        "No warranty, use it at your own risk.\n\n"
+        "Options:\n"
+        "  -l, --list             List all HID devices.\n"
+        "  -i, --vpid VID:PID     Use Vendor ID and Product ID to get info from device.\n"
+        "  -p, --path PATH        Use PATH (see --list option) to get info from device.\n"
+        "  -d, --description      Show the description of usage names.\n"
+        "  -h, --help             Show help.\n"
+        , program_name
+    );
 }
 
 void show_description() {
-    printf("\n");
-    printf("General\n");
-    printf("———————————————————————————————————————————————————————————————————————————————————————————\n");
-    printf("Manufacturer:\n    Describe the manufacturer.\n");
-    printf("Product:\n    Describe the product.\n");
-    printf("Serial number:\n    Describe the device’s serial number.\n");
-    printf("Firmware version:\n    Vendor-defined - Version of the firmware.\n");
-    printf("Misc 1:\n    Vendor-defined - Unknown indexed string.\n");
+    printf(
+        "\n"
+        "General\n"
+        "———————————————————————————————————————————————————————————————————————————————————————————\n"
+        "Manufacturer:\n    Describe the manufacturer.\n"
+        "Product:\n    Describe the product.\n"
+        "Serial number:\n    Describe the device’s serial number.\n"
+        "Firmware version:\n    Vendor-defined - Version of the firmware.\n"
+        "Misc 1:\n    Vendor-defined - Unknown indexed string.\n"
 
-    printf("\n");
-    printf("Power\n");
-    printf("———————————————————————————————————————————————————————————————————————————————————————————\n");
-    printf("Output config active power:\n    Nominal value of the output active (RMS) power.\n");
-    printf("Config voltage:\n    Nominal value of the voltage.\n");
-    printf("Input voltage:\n    Actual value of the input voltage.\n");
-    printf("Output voltage:\n    Actual value of the output voltage.\n");
-    printf("Low voltage transfer:\n    The minimum line voltage allowed before the PS system transfers to battery backup.\n");
-    printf("High voltage transfer:\n    The maximum line voltage allowed before the PS system transfers to battery backup.\n");
-    printf("Output percent load:\n    The actual value of the percentage of the power capacity presently being used\n");
-    printf("    on this output line, i.e., the greater of the percent load of true power\n");
-    printf("    capacity and the percent load of apparent power.\n");
-    printf("Input frequency:\n    Actual value of the input frequency.\n");
-    printf("Output frequency:\n    Actual value of the output frequency.\n");
-    printf("Boost:\n    Boosted/Not Boosted.\n");
-    printf("    The status indicates this input is used in the module but voltage is increased\n");
-    printf("    to fit within nominal range values.\n");
-    printf("Overload:\n    Overloaded/Not Overloaded.\n");
-    printf("Buck:\n    Bucked/Not Bucked.\n");
-    printf("    The status indicates this input is used in the module but voltage is reduced\n");
-    printf("    to fit with nominal range values.\n");
+        "\n"
+        "Power\n"
+        "———————————————————————————————————————————————————————————————————————————————————————————\n"
+        "Output config active power:\n    Nominal value of the output active (RMS) power.\n"
+        "Config voltage:\n    Nominal value of the voltage.\n"
+        "Input voltage:\n    Actual value of the input voltage.\n"
+        "Output voltage:\n    Actual value of the output voltage.\n"
+        "Low voltage transfer:\n    The minimum line voltage allowed before the PS system transfers to battery backup.\n"
+        "High voltage transfer:\n    The maximum line voltage allowed before the PS system transfers to battery backup.\n"
+        "Output percent load:\n    The actual value of the percentage of the power capacity presently being used\n"
+        "    on this output line, i.e., the greater of the percent load of true power\n"
+        "    capacity and the percent load of apparent power.\n"
+        "Input frequency:\n    Actual value of the input frequency.\n"
+        "Output frequency:\n    Actual value of the output frequency.\n"
+        "Overload:\n    Overloaded/Not Overloaded.\n"
+        "    Indicates if the power demand from the connected devices exceeds\n"
+        "    the UPS's maximum output capacity.\n"
+        "Boost active:\n    Boosted/Not Boosted.\n"
+        "    The status indicates this input is used in the module but voltage is increased\n"
+        "    to fit within nominal range values.\n"
+        "Buck active:\n    Bucked/Not Bucked.\n"
+        "    The status indicates this input is used in the module but voltage is reduced\n"
+        "    to fit with nominal range values.\n"
 
-    printf("\n");
-    printf("Battery\n");
-    printf("———————————————————————————————————————————————————————————————————————————————————————————\n");
-    printf("Config Voltage:\n    Nominal value of the voltage.\n");
-    printf("Voltage:\n    Actual value of the voltage.\n");
-    printf("Remaining capacity:\n    The predicted remaining capacity.\n");
-    printf("Run time to empty:\n    The predicted remaining battery life, at the present rate of discharge.\n");
-    printf("Remaining time limit:\n    Sets the value of the battery’s remaining time, which causes the RemainingTimeLimit\n");
-    printf("    control to be activated. Whenever the battery’s remaining time falls below the\n");
-    printf("    value in the RemainingTimeLimit register, the battery periodically issues a\n");
-    printf("    RemainingTimeLimitExpired alarm.\n");
-    printf("AC present:\n    Alternating current present/not present.\n");
-    printf("Charging:\n    Battery is charging.\n");
-    printf("Discharging:\n    Battery is discharing.\n");
-    printf("Fully charged:\n    Battery is fully-charged.\n");
-    printf("Below remaining capacity limit:\n    Is below?.\n");
-    printf("Remaining time limit expired:\n    Has expired?.\n");
-    printf("Design capacity:\n    The theoretical capacity of a new pack.\n");
-    printf("Capacity granularity 1:\n    Battery capacity granularity between low and warning.\n");
-    printf("Capacity granularity 2:\n    Battery capacity granularity between warning and full.\n");
-    printf("Warning capacity limit:\n    OEM-designed battery warning capacity.\n");
-    printf("Full charge capacity:\n    The predicted pack capacity when it is fully charged.\n");
-    printf("Remaining capacity limit:\n    Sets the value of the battery’s remaining capacity, which causes a remaining\n");
-    printf("    capacity alarm to be sent. Whenever the battery’s remaining capacity falls below.\n");
-    printf("    the value in the RemainingCapacity alarm register, the battery periodically.\n");
-    printf("    issues a RemainingCapacity alarm.\n");
-    printf("Battery’s chemistry:\n    The battery’s chemistry.\n");
-    printf("Rechargable:\n    Whether the battery is rechargable.\n");
-    printf("\n");
+        "\n"
+        "Battery\n"
+        "———————————————————————————————————————————————————————————————————————————————————————————\n"
+        "Config Voltage:\n    Nominal value of the voltage.\n"
+        "Voltage:\n    Actual value of the voltage.\n"
+        "Remaining capacity:\n    The predicted remaining capacity.\n"
+        "Run time to empty:\n    The predicted remaining battery life, at the present rate of discharge.\n"
+        "Remaining time limit:\n    Sets the value of the battery’s remaining time, which causes the RemainingTimeLimit\n"
+        "    control to be activated. Whenever the battery’s remaining time falls below the\n"
+        "    value in the RemainingTimeLimit register, the battery periodically issues a\n"
+        "    RemainingTimeLimitExpired alarm.\n"
+        "AC present:\n    Alternating current present/not present.\n"
+        "Charging:\n    Battery is charging.\n"
+        "Discharging:\n    Battery is discharing.\n"
+        "Fully charged:\n    Battery is fully-charged.\n"
+        "Below remaining capacity limit:\n    Is below?.\n"
+        "Remaining time limit expired:\n    Has expired?.\n"
+        "Design capacity:\n    The theoretical capacity of a new pack.\n"
+        "Capacity granularity 1:\n    Battery capacity granularity between low and warning.\n"
+        "Capacity granularity 2:\n    Battery capacity granularity between warning and full.\n"
+        "Warning capacity limit:\n    OEM-designed battery warning capacity.\n"
+        "Full charge capacity:\n    The predicted pack capacity when it is fully charged.\n"
+        "Remaining capacity limit:\n    Sets the value of the battery’s remaining capacity, which causes a remaining\n"
+        "    capacity alarm to be sent. Whenever the battery’s remaining capacity falls below.\n"
+        "    the value in the RemainingCapacity alarm register, the battery periodically.\n"
+        "    issues a RemainingCapacity alarm.\n"
+        "Battery’s chemistry:\n    The battery’s chemistry.\n"
+        "Rechargable:\n    Whether the battery is rechargable.\n"
+        "\n"
+    );
 }
 
 unsigned char is_valid_vpid(unsigned short *vid, unsigned short *pid, char *vpid) {
