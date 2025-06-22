@@ -2,6 +2,7 @@ BIN = pwinfo
 SRC_DIR = src
 SRC = $(wildcard $(SRC_DIR)/*.c)
 OBJ = $(patsubst $(SRC_DIR)/%.c,%.o,$(SRC))
+LIBS = $(wildcard *.a)
 CC = gcc
 CFLAGS = -I/usr/include/hidapi
 LDFLAGS = -lhidapi-libusb
@@ -16,10 +17,10 @@ $(BIN): $(OBJ)
 
 # static requires to build static libusb without libudev
 static: $(OBJ)
-	$(CC) $(CFLAGS) -static -o $(BIN) $^ $(LDFLAGS) libusb-1.0.a
+	$(CC) $(CFLAGS) -static -o $(BIN) $^ $(LDFLAGS) $(LIBS)
 
 clean:
-	rm -f $(BIN) $(OBJ)
+	rm -f $(BIN) $(OBJ) $(LIBS)
 
 rebuild: clean all
 
