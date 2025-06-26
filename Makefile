@@ -24,4 +24,4 @@ clean:
 
 rebuild: clean all
 
-.PHONY: all clean rebuild
+.PHONY: all static clean rebuild
