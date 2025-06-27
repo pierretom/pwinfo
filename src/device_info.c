@@ -55,8 +55,8 @@ unsigned char get_info_report_id_24(hid_device *handle) {
         return 1;
 
     // Extract data from the report
-    unsigned short config_active_power = (buf[1] | (buf[2] << 8));
-    printf("Output config active power:     %hu W\n", config_active_power);
+    float config_active_power = (buf[1] | (buf[2] << 8));
+    printf("Output config active power:     %.1f W\n", config_active_power);
 
     return 0;
 }
@@ -70,8 +70,8 @@ unsigned char get_info_report_id_14(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short config_voltage = (buf[1] | (buf[2] << 8));
-    printf("Config voltage:                 %hu V\n", config_voltage);
+    float config_voltage = (buf[1] | (buf[2] << 8));
+    printf("Config voltage:                 %.1f V\n", config_voltage);
 
     return 0;
 }
@@ -85,8 +85,8 @@ unsigned char get_info_report_id_15(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short input_voltage = (buf[1] | (buf[2] << 8)) / 10;
-    printf("Input voltage:                  %hu V\n", input_voltage);
+    float input_voltage = (buf[1] | (buf[2] << 8)) / 10.0;
+    printf("Input voltage:                  %.1f V\n", input_voltage);
 
     return 0;
 }
@@ -100,8 +100,8 @@ unsigned char get_info_report_id_18(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short output_voltage = (buf[1] | (buf[2] << 8)) / 10;
-    printf("Output voltage:                 %hu V\n", output_voltage);
+    float output_voltage = (buf[1] | (buf[2] << 8)) / 10.0;
+    printf("Output voltage:                 %.1f V\n", output_voltage);
 
     return 0;
 }
@@ -115,8 +115,8 @@ unsigned char get_info_report_id_16(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short low_voltage_transfert = (buf[1] | (buf[2] << 8));
-    printf("Low voltage transfer:           %hu V\n", low_voltage_transfert);
+    float low_voltage_transfert = (buf[1] | (buf[2] << 8));
+    printf("Low voltage transfer:           %.1f V\n", low_voltage_transfert);
 
     return 0;
 }
@@ -130,8 +130,8 @@ unsigned char get_info_report_id_17(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short high_voltage_transfert = (buf[1] | (buf[2] << 8));
-    printf("High voltage transfer:          %hu V\n", high_voltage_transfert);
+    float high_voltage_transfert = (buf[1] | (buf[2] << 8));
+    printf("High voltage transfer:          %.1f V\n", high_voltage_transfert);
 
     return 0;
 }
@@ -145,8 +145,8 @@ unsigned char get_info_report_id_28(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short input_frequency = (buf[1] | (buf[2] << 8)) / 10;
-    printf("Input frequency:                %hu Hz\n", input_frequency);
+    float input_frequency = (buf[1] | (buf[2] << 8)) / 10.0;
+    printf("Input frequency:                %.1f Hz\n", input_frequency);
 
     return 0;
 }
@@ -160,8 +160,8 @@ unsigned char get_info_report_id_29(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short output_frequency = (buf[1] | (buf[2] << 8)) / 10;
-    printf("Output frequency:               %hu Hz\n", output_frequency);
+    float output_frequency = (buf[1] | (buf[2] << 8)) / 10.0;
+    printf("Output frequency:               %.1f Hz\n", output_frequency);
 
     return 0;
 }
@@ -212,8 +212,8 @@ unsigned char get_info_report_id_9(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short config_voltage = (buf[1] | (buf[2] << 8)) / 10;
-    printf("Config voltage:                 %hu V\n", config_voltage);
+    float config_voltage = (buf[1] | (buf[2] << 8)) / 10.0;
+    printf("Config voltage:                 %.1f V\n", config_voltage);
 
     return 0;
 }
@@ -227,8 +227,8 @@ unsigned char get_info_report_id_10(hid_device *handle) {
     if (get_input_report(handle, report_id, buf, &report_size))
         return 1;
 
-    unsigned short voltage = (buf[1] | (buf[2] << 8)) / 10;
-    printf("Voltage:                        %hu V\n", voltage);
+    float voltage = (buf[1] | (buf[2] << 8)) / 10.0;
+    printf("Voltage:                        %.1f V\n", voltage);
 
     return 0;
 }
