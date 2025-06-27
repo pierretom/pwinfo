@@ -6,9 +6,9 @@
 
 // Structure to store hours, minutes and seconds
 typedef struct {
-    unsigned int hours;
-    unsigned int minutes;
-    unsigned int seconds;
+    unsigned char hours;
+    unsigned char minutes;
+    unsigned char seconds;
 } time;
 
 time convert_seconds(unsigned short sec) { // Max: 18:12:15
@@ -38,7 +38,7 @@ unsigned char get_input_report(hid_device *handle, unsigned char report_id,
     // Get the input report with report ID
     *report_size = hid_get_feature_report(handle, buf, sizeof(buf));
     if (report_size < 0) {
-        printf("Warning: unable to get input report for report ID %hhu.\n\n", report_id);
+        fprintf(stderr, "Warning: unable to get input report for report ID %hhu.\n\n", report_id);
         return 1;
     }
 
@@ -252,7 +252,7 @@ unsigned char get_info_report_id_8(hid_device *handle) {
 
     sec = run_time_to_empty;
     time_var = convert_seconds(sec);
-    printf("Run time to empty:              %02hhu:%02hu:%02hhu\n", time_var.hours, time_var.minutes, time_var.seconds);
+    printf("Run time to empty:              %02hhu:%02hhu:%02hhu\n", time_var.hours, time_var.minutes, time_var.seconds);
 
     sec = remaining_time_limit;
     time_var = convert_seconds(sec);
@@ -441,7 +441,7 @@ unsigned char get_info_from_vpid(unsigned short pid, unsigned short vid) {
     // Open the device with Product ID and Vendor ID
     handle = hid_open(pid, vid, NULL);
     if (!handle) {
-        printf("Unable to open device with PID:VID: %04x:%04x.\n", pid, vid);
+        fprintf(stderr, "Unable to open device with PID:VID: %04hX:%04hX.\n", pid, vid);
         hid_exit();
         return 1;
     }
@@ -461,7 +461,7 @@ unsigned char get_info_from_path(const char* path) {
     // Open the device with the path
     handle = hid_open_path(path);
     if (!handle) {
-        printf("Unable to open device with path %s.\n", path);
+        fprintf(stderr, "Unable to open device with path %s.\n", path);
         hid_exit();
         return 1;
     }

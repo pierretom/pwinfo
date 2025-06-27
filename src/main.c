@@ -100,9 +100,9 @@ void show_description() {
 
 unsigned char is_valid_vpid(unsigned short *vid, unsigned short *pid, char *vpid) {
 
-    if (sscanf(vpid, "%hx:%hx", vid, pid) != 2) {
+    if (sscanf(vpid, "%hX:%hX", vid, pid) != 2) {
 
-        printf("Format VID:PID invalid. Use the hexadecimal format (example: 0764:0601).\n");
+        fprintf(stderr, "Format VID:PID invalid. Use the hexadecimal format (example: 0764:0601).\n");
         return 1;
     }
 
@@ -121,7 +121,7 @@ int main(int argc, char* argv[]) {
     }
 
     if (option_count > 1) {
-        printf("Please, provide only one option at a time.\n");
+        fprintf(stderr, "Please, provide only one option at a time.\n");
         return EXIT_FAILURE;
     }
 
@@ -137,7 +137,7 @@ int main(int argc, char* argv[]) {
         }
 
         if (!match) {
-            printf("Unknown option: %s.\n", argv[optind]);
+            fprintf(stderr, "Unknown option: %s.\n", argv[optind]);
             return EXIT_FAILURE;
         }
     }
@@ -145,11 +145,11 @@ int main(int argc, char* argv[]) {
     opt = getopt_long(argc, argv, short_options, long_options, &option_index);
 
     if (optind < argc) {
-        printf("Too many arguments: ");
+        fprintf(stderr, "Too many arguments: ");
         for (int i = optind; i < argc; i++) {
-            printf("%s ", argv[i]);
+            fprintf(stderr, "%s ", argv[i]);
         }
-            printf("\n");
+            fprintf(stderr, "\n");
             return EXIT_FAILURE;
     }
 
@@ -160,7 +160,7 @@ int main(int argc, char* argv[]) {
             break;
         case 'i':
             if (optarg == argv[optind -1] + 2) { // Space mandatory between option and value for short options
-                printf("Unknown option: -i%s.\n", optarg);
+                fprintf(stderr, "Unknown option: -i%s.\n", optarg);
                 return EXIT_FAILURE;
             }
 
@@ -174,7 +174,7 @@ int main(int argc, char* argv[]) {
             break;
         case 'p':
             if (optarg == argv[optind -1] + 2) {
-                printf("Unknown option: -p%s.\n", optarg);
+                fprintf(stderr, "Unknown option: -p%s.\n", optarg);
                 return EXIT_FAILURE;
             }
 
@@ -191,15 +191,15 @@ int main(int argc, char* argv[]) {
         case '?':
             if (optopt == 'i' || optopt == 'p') {
                 if (optarg == NULL) {
-                    printf("Option %s requires an argument.\n", argv[optind - 1]);
+                    fprintf(stderr, "Option %s requires an argument.\n", argv[optind - 1]);
                     return EXIT_FAILURE;
                 }
             }
 
-            printf("Unknown option: %s.\n", argv[optind - 1]);
+            fprintf(stderr, "Unknown option: %s.\n", argv[optind - 1]);
             return EXIT_FAILURE;
         default:
-            printf("Use -h to show help.\n");
+            fprintf(stderr, "Use -h to show help.\n");
             return EXIT_FAILURE;
     }
 
